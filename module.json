@@ -3,5 +3,9 @@
 	"name": "etching-supporter",
 	"author": "Modnox",
 	"description": "Etching remaining time tracker",
+	"options": {
+		"niceName": "etchings",
+		"guiName": "etchings"
+	},
 	"servers": ["https://raw.githubusercontent.com/Modnox/etching-supporter/main/"]
 }

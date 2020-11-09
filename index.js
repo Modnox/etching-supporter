@@ -46,7 +46,6 @@ module.exports = function etchingSupporter(mod) {
             days = warningDays;
             name = e.name;
             setTimeout(function () {
-                console.log(e.name + ' ' + equippedGear.size)
                 executeRequest(name);
             }, 500);
         }
