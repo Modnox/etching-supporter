@@ -5,6 +5,7 @@ module.exports = function etchingSupporter(mod) {
     const type = 21;
     let name;
     let days;
+    let enabled = false;
     const slotMapping = new Map([
         [1, 'Weapon'],
         [3, 'Body Armor'],
@@ -23,25 +24,31 @@ module.exports = function etchingSupporter(mod) {
     mod.command.add('etch', (cmd) => {
         switch (cmd) {
             case "all":
+                enabled = true;
                 days = 60;
                 executeRequest(name);
                 break;
             default:
+                enabled = true;
                 days = warningDays;
                 executeRequest(name)
         }
     })
 
     mod.hook('S_SHOW_ITEM_TOOLTIP', 14, e => {
-            var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
-            remainingDays = parseInt(remainingDays)
-            if (remainingDays < days && remainingDays > 0) {
-                command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
+            if (enabled) {
+                var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
+                remainingDays = parseInt(remainingDays)
+                if (remainingDays < days && remainingDays > 0) {
+                    command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
+                }
             }
+
         }
     )
 
     mod.hook('S_LOGIN', 14, e => {
+            enabled = true;
             equippedGear.clear()
             days = warningDays;
             name = e.name;
@@ -76,6 +83,7 @@ module.exports = function etchingSupporter(mod) {
                 requestItem(entry, name)
                 await sleep(rand(500, 1000));
             }
+            enabled = false;
         }
     }
 
