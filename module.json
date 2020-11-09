@@ -1,0 +1,7 @@
+{
+	"disableAutoUpdate": false,
+	"name": "etching-supporter",
+	"author": "Modnox",
+	"description": "Etching remaining time tracker",
+	"servers": ["https://raw.githubusercontent.com/Modnox/etching-supporter/master/"]
+}
