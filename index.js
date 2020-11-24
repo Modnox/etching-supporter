@@ -54,7 +54,7 @@ module.exports = function etchingSupporter(mod) {
             name = e.name;
             setTimeout(function () {
                 executeRequest(name);
-            }, 5000);
+            }, 10000);
         }
     )
 
