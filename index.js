@@ -38,8 +38,11 @@ module.exports = function etchingSupporter(mod) {
     mod.hook('S_SHOW_ITEM_TOOLTIP', 14, e => {
             if (enabled) {
                 var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
+                if (remainingDays < 1 && remainingDays > 0) {
+                    command.message(slotMapping.get(e.slot) + ': Running out TODAY!!');
+                }
                 remainingDays = parseInt(remainingDays)
-                if (remainingDays < days && remainingDays >= 0) {
+                if (remainingDays < days && remainingDays > 0) {
                     command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
                 }
             }
