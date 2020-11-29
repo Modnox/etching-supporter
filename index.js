@@ -39,11 +39,8 @@ module.exports = function etchingSupporter(mod) {
             if (enabled) {
                 var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
                 remainingDays = parseInt(remainingDays)
-                if (remainingDays < days && remainingDays > 0) {
+                if (remainingDays < days && remainingDays >= 0) {
                     command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
-                }
-                if (remainingDays === 0){
-                    command.message(slotMapping.get(e.slot) + ': Running out today!!!');
                 }
             }
         }
