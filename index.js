@@ -42,8 +42,10 @@ module.exports = function etchingSupporter(mod) {
                 if (remainingDays < days && remainingDays > 0) {
                     command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
                 }
+                if (remainingDays === 0){
+                    command.message(slotMapping.get(e.slot) + ': Running out today!!!');
+                }
             }
-
         }
     )
 
