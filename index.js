@@ -6,7 +6,6 @@ module.exports = function etchingSupporter(mod) {
     let name;
     let days;
     let enabled = false;
-    let debug = false;
     const slotMapping = new Map([
         [1, 'Weapon'],
         [3, 'Body Armor'],
@@ -28,10 +27,6 @@ module.exports = function etchingSupporter(mod) {
                 enabled = true;
                 days = 60;
                 executeRequest(name);
-                break;
-            case "debug":
-                debug = !debug;
-                command.message('debug is now ' + debug ? 'enabled' : 'disabled');
                 break;
             default:
                 enabled = true;
