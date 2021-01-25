@@ -6,6 +6,7 @@ module.exports = function etchingSupporter(mod) {
     let name;
     let days;
     let enabled = false;
+    let debug = false;
     const slotMapping = new Map([
         [1, 'Weapon'],
         [3, 'Body Armor'],
@@ -28,6 +29,10 @@ module.exports = function etchingSupporter(mod) {
                 days = 60;
                 executeRequest(name);
                 break;
+            case "debug":
+                debug = !debug;
+                command.message('debug is now ' + debug ? 'enabled' : 'disabled');
+                break;
             default:
                 enabled = true;
                 days = warningDays;
@@ -40,12 +45,14 @@ module.exports = function etchingSupporter(mod) {
                 var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
                 if (remainingDays < 1 && remainingDays > 0) {
                     command.message(slotMapping.get(e.slot) + ': Running out TODAY!!');
+                    return;
                 }
                 remainingDays = parseInt(remainingDays)
                 if (remainingDays < days && remainingDays > 0) {
                     command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
+                    return;
                 }
-                command.message(slotMapping.get(e.slot)+': '+ ' Has no active etching.')
+                command.message(slotMapping.get(e.slot) + ': ' + ' Has no active etching.')
             }
         }
     )
@@ -65,6 +72,9 @@ module.exports = function etchingSupporter(mod) {
             for (const item of e.items) {
                 if (item.hasEtching && slotMapping.has(item.slot)) {
                     equippedGear.add(item.dbid)
+                    if(debug){
+                        console.log('debug: ' + slotMapping.get(item.slot) + ' ' + item.customString)
+                    }
                 }
             }
         }
