@@ -42,6 +42,9 @@ module.exports = function etchingSupporter(mod) {
 
     mod.hook('S_SHOW_ITEM_TOOLTIP', 14, e => {
             if (enabled) {
+                if (debug) {
+                    console.log(slotMapping.get(e.slot) + ' equippedItemLevel: ' + e.currentEquippedItemLevel + ' container: ' + e.container)
+                }
                 var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
                 if (remainingDays < 1 && remainingDays > 0) {
                     command.message(slotMapping.get(e.slot) + ': Running out TODAY!!');
@@ -75,9 +78,6 @@ module.exports = function etchingSupporter(mod) {
             for (const item of e.items) {
                 if (item.hasEtching && slotMapping.has(item.slot)) {
                     equippedGear.add(item.dbid)
-                    if (debug) {
-                        console.log('debug: ' + slotMapping.get(item.slot) + ' ' + item.customString)
-                    }
                 }
             }
         }
