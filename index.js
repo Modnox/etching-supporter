@@ -6,6 +6,7 @@ module.exports = function etchingSupporter(mod) {
     let name;
     let days;
     let enabled = false;
+    let activeEtchingCheck = false;
     const slotMapping = new Map([
         [1, 'Weapon'],
         [3, 'Body Armor'],
@@ -51,6 +52,7 @@ module.exports = function etchingSupporter(mod) {
 
     mod.hook('S_LOGIN', 14, e => {
             enabled = true;
+            activeEtchingCheck = true;
             equippedGear.clear()
             days = warningDays;
             name = e.name;
@@ -69,6 +71,11 @@ module.exports = function etchingSupporter(mod) {
                     equippedGear.add(item.dbid)
                 }
             }
+            activeEtchings = slotMapping.size - equippedGear.size
+            if (activeEtchingCheck && activeEtchings !== 0) {
+                command.message('You are missing ' + activeEtchings + ' etchings.')
+            }
+            activeEtchingCheck = false;
         }
     )
 
