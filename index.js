@@ -71,7 +71,7 @@ module.exports = function etchingSupporter(mod) {
                     equippedGear.add(item.dbid)
                 }
             }
-            activeEtchings = slotMapping.size - equippedGear.size
+            let activeEtchings = slotMapping.size - equippedGear.size
             if (activeEtchingCheck && activeEtchings !== 0) {
                 command.message('You are missing ' + activeEtchings + ' etchings.')
             }
