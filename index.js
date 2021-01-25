@@ -43,7 +43,10 @@ module.exports = function etchingSupporter(mod) {
     mod.hook('S_SHOW_ITEM_TOOLTIP', 14, e => {
             if (enabled) {
                 if (debug) {
-                    console.log(slotMapping.get(e.slot) + ' equippedItemLevel: ' + e.currentEquippedItemLevel + ' container: ' + e.container)
+                    console.log(slotMapping.get(e.slot) + ' container: ' + e.container)
+                }
+                if (e.container !== 14) {
+                    return;
                 }
                 var remainingDays = parseInt(e.etchingSecRemaining1) / 86400;
                 if (remainingDays < 1 && remainingDays > 0) {
