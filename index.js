@@ -72,8 +72,10 @@ module.exports = function etchingSupporter(mod) {
                 }
             }
             let activeEtchings = slotMapping.size - equippedGear.size
-            if (activeEtchingCheck && activeEtchings !== 0) {
-                command.message('You are missing ' + activeEtchings + ' etchings.')
+            if (activeEtchingCheck && (activeEtchings !== 0)) {
+                setTimeout(function () {
+                    command.message('You are missing ' + activeEtchings + ' etchings.');
+                }, 10000);
             }
             activeEtchingCheck = false;
         }
