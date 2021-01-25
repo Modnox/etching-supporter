@@ -52,6 +52,9 @@ module.exports = function etchingSupporter(mod) {
                     command.message(slotMapping.get(e.slot) + ': ' + remainingDays + ' days left.');
                     return;
                 }
+                if (remainingDays > days) {
+                    return;
+                }
                 command.message(slotMapping.get(e.slot) + ': ' + ' Has no active etching.')
             }
         }
@@ -72,7 +75,7 @@ module.exports = function etchingSupporter(mod) {
             for (const item of e.items) {
                 if (item.hasEtching && slotMapping.has(item.slot)) {
                     equippedGear.add(item.dbid)
-                    if(debug){
+                    if (debug) {
                         console.log('debug: ' + slotMapping.get(item.slot) + ' ' + item.customString)
                     }
                 }
